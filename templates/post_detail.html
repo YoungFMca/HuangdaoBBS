@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>   
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>作者: {{ post.author }} 时间: {{ post.time.strftime('%Y-%m-%d %H:%M') }}</p>
+    <p>{{ post.content }}</p>
+
+    {% if post.image_filename %}
+    <div>
+        <img src="{{url_for('static',filename='uploads/'+post.image_filename)}}" alt="Post Image" style="max-width:600px;height:auto">
+    </div>
+    {% endif %}
+
+    <h3>评论</h3>
+    <ul>
+        {% for comment in comments %}
+        <li>{{ comment.time.strftime('%Y-%m-%d %H:%M') }} : {{ comment.content }}</li>
+        {% endfor %}
+    </ul>
+
+    <form method="post">
+        评论:<br>
+        <textarea name="content" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="提交评论">
+    </form>
+
+    <br><a href="/">返回首页</a>
+</body>
+</html>

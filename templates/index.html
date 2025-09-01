@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>荒岛论坛</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>荒岛论坛 ver0.0</h1>
+    <p><a href="/snake">🎮 贪吃蛇小游戏</a></p>
+    <a href="/new">发帖</a>
+    <ul>
+        <p><a href="/snake">🎮 贪吃蛇小游戏</a></p>
+        {% for post in posts %}
+        <li>
+            <a href="/post/{{ post.id }}">{{ post.title }}</a> - {{ post.author }} - {{ post.time.strftime('%Y-%m-%d %H:%M') }}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
