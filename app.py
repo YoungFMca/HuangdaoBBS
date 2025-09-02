@@ -6,6 +6,8 @@ import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///forum.db'
+app.jinja_env.auto_reload=True
+app.config['TEMPLATES_AUTO_RELOAD']=True
 db = SQLAlchemy(app)
 
 # 上传目录
@@ -78,7 +80,9 @@ def post_detail(post_id):
         db.session.commit()
         return redirect(url_for('post_detail', post_id=post_id))
     return render_template('post_detail.html', post=post, comments=comments)
-
+@app.route('/signup',methods=['POST','GET'])
+def signup():
+    return render_template('')
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
